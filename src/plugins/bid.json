@@ -1,5 +1,6 @@
 {
     "address": "0x67e2077fb2970491f8968d53dbf0ffeee81561c6",
+    "oneAddress": "one1vl3qwlajjuzfr7yk34fahu8lam5p2cwxm7lfjy",
     "abi": [
         {
             "inputs": [
@@ -10,6 +11,25 @@
                 }
             ],
             "name": "bid",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "id",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "id",
+                    "type": "uint256"
+                }
+            ],
+            "name": "startSale",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"

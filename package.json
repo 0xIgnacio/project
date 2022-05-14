@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "ethereum-input-data-decoder": "^0.4.1",
     "vue": "^2.6.14"
   },
   "devDependencies": {
@@ -17,14 +18,14 @@
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
-    "from-exponential": "^1.1.1",
     "autoprefixer": "^10.4.7",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "ethers": "^5.4.1",
+    "from-exponential": "^1.1.1",
     "postcss": "^8.4.13",
     "tailwindcss": "^3.0.24",
-    "vue-template-compiler": "^2.6.14",
-    "ethers": "^5.4.1"
+    "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
     "root": true,
@@ -40,7 +41,7 @@
     },
     "rules": {
       "no-unused-vars": "off"
-  }
+    }
   },
   "browserslist": [
     "> 1%",

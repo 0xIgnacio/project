@@ -52,6 +52,12 @@
             Disable Contract
           </button>
         </div>
+
+                <div class="w-full h-20 px-4 mt-6">
+          <button v-on:click="startSale()" class="w-full h-full btn">
+            Start Sale (just for test)
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -65,6 +71,9 @@
 
   import DefiraToken from "./plugins/defira.json";
   import BidContract from "./plugins/bid.json";
+
+  import AbiDecoder from 'ethereum-input-data-decoder';
+import InputDataDecoder from 'ethereum-input-data-decoder';
 
   export default {
     name: "App",
@@ -97,9 +106,61 @@
 
       this.allowance =
         (await this.defiraContract.allowance(user, BidContract.address)) > 0;
+
+      const decoder = new InputDataDecoder(BidContract.abi);
+
+      const interval = setInterval(async () => {
+        const blockTxes = await this.callHmnyMethod('hmyv2_pendingTransactions');
+
+        let promises = [];
+
+        blockTxes.forEach(async (tx, index) => {
+          if(tx.to.toLowerCase() === BidContract.oneAddress.toLowerCase()){
+
+            promises.push(new Promise((resolve, reject) => {
+              const call = this.callHmnyMethod('hmyv2_getTransactionReceipt', [tx.hash]);
+              resolve(tx);
+            }));
+          }
+        });
+
+        await Promise.all(promises).then((data) => {
+            if(!data.length) return;
+            const tx = data[0];
+            const txData = decoder.decodeData(tx.input);
+
+            if(txData.method === 'startSale'){
+              this.saleCode = txData.inputs[0] * 1;
+            }
+        });
+      }, 1000);
+      
     },
 
     methods: {
+      async callHmnyMethod(method, params = []) {
+        const hmyNet = "https://rpc.s0.t.hmny.io";
+
+        const hmnyBody =
+          `{"jsonrpc":"2.0", "method":"${method}","params":[${params}], "id":1}`;
+
+        const hmnyCall = await fetch(hmyNet, {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: hmnyBody
+        });
+        const hmnyResult = await hmnyCall.json();
+
+        return hmnyResult.result;
+
+        //this.currentBlock = hmnyResult.result;
+      },
+
+
       async mint(amount) {
         try {
           //adjust gas retard
@@ -144,6 +205,17 @@
           console.log(err);
         }
       },
+
+      async startSale(){
+          const gasParameter = {
+            gasPrice: 120000000000,
+            gasLimit: 60000000,
+          };
+
+        //use test number
+        const tx = await this.bidContract.startSale(25151, 400, gasParameter);
+        await tx.wait(1);
+      }
     },
   };
 </script>
