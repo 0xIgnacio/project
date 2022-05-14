@@ -29,7 +29,7 @@
             <p class="mt-2 mb-2 text-3xl text-white opacity-90">
               Enter sale code
             </p>
-            <input v-model="saleCode" type="text" class="w-8/12 h-12 mt-2 rounded-xl form-input" />
+            <input v-model="saleCode" type="number" class="w-8/12 h-12 mt-2 rounded-xl form-input" />
             <hr class="w-full mt-6 opacity-20" />
             <p class="mt-6 mb-2 text-2xl text-white opacity-90"></p>
           </div>
