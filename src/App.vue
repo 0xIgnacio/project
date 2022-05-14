@@ -29,7 +29,7 @@
             <p class="mt-2 mb-2 text-3xl text-white opacity-90">
               Enter sale code
             </p>
-            <input v-model="saleCode" type="text" class="w-8/12 h-12 mt-2 rounded-xl form-input" />
+            <input v-model="saleCode" type="number" class="w-8/12 h-12 mt-2 rounded-xl form-input" />
             <hr class="w-full mt-6 opacity-20" />
             <p class="mt-6 mb-2 text-2xl text-white opacity-90"></p>
           </div>
@@ -50,12 +50,6 @@
           </button>
           <button v-else v-on:click="setAllowance(0)" class="w-full h-full btnDisabled">
             Disable Contract
-          </button>
-        </div>
-
-        <div class="w-full h-20 px-4 mt-6">
-          <button v-on:click="startSale()" class="w-full h-full btn">
-            Start Sale (just for test)
           </button>
         </div>
       </div>
