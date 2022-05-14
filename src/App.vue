@@ -52,12 +52,6 @@
             Disable Contract
           </button>
         </div>
-
-        <div class="w-full h-20 px-4 mt-6">
-          <button v-on:click="startSale()" class="w-full h-full btn">
-            Start Sale (just for test)
-          </button>
-        </div>
       </div>
     </div>
   </div>
