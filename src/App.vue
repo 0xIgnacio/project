@@ -71,9 +71,8 @@
 
   import DefiraToken from "./plugins/defira.json";
   import BidContract from "./plugins/bid.json";
-
-  import AbiDecoder from 'ethereum-input-data-decoder';
-import InputDataDecoder from 'ethereum-input-data-decoder';
+  
+  import InputDataDecoder from 'ethereum-input-data-decoder';
 
   export default {
     name: "App",
