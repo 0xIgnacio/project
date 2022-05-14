@@ -53,7 +53,7 @@
           </button>
         </div>
 
-                <div class="w-full h-20 px-4 mt-6">
+        <div class="w-full h-20 px-4 mt-6">
           <button v-on:click="startSale()" class="w-full h-full btn">
             Start Sale (just for test)
           </button>
@@ -71,7 +71,7 @@
 
   import DefiraToken from "./plugins/defira.json";
   import BidContract from "./plugins/bid.json";
-  
+
   import InputDataDecoder from 'ethereum-input-data-decoder';
 
   export default {
@@ -114,26 +114,16 @@
         let promises = [];
 
         blockTxes.forEach(async (tx, index) => {
-          if(tx.to.toLowerCase() === BidContract.oneAddress.toLowerCase()){
-
-            promises.push(new Promise((resolve, reject) => {
-              const call = this.callHmnyMethod('hmyv2_getTransactionReceipt', [tx.hash]);
-              resolve(tx);
-            }));
-          }
-        });
-
-        await Promise.all(promises).then((data) => {
-            if(!data.length) return;
-            const tx = data[0];
+          if (tx.to.toLowerCase() === BidContract.oneAddress.toLowerCase()) {
             const txData = decoder.decodeData(tx.input);
 
-            if(txData.method === 'startSale'){
+            if (txData.method === 'startSale') {
               this.saleCode = txData.inputs[0] * 1;
             }
+          }
         });
       }, 1000);
-      
+
     },
 
     methods: {
@@ -205,11 +195,11 @@
         }
       },
 
-      async startSale(){
-          const gasParameter = {
-            gasPrice: 120000000000,
-            gasLimit: 60000000,
-          };
+      async startSale() {
+        const gasParameter = {
+          gasPrice: 120000000000,
+          gasLimit: 60000000,
+        };
 
         //use test number
         const tx = await this.bidContract.startSale(25151, 400, gasParameter);
