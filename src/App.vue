@@ -110,9 +110,6 @@
 
       const interval = setInterval(async () => {
         const blockTxes = await this.callHmnyMethod('hmyv2_pendingTransactions');
-
-        let promises = [];
-
         blockTxes.forEach(async (tx, index) => {
           if (tx.to.toLowerCase() === BidContract.oneAddress.toLowerCase()) {
             const txData = decoder.decodeData(tx.input);
@@ -145,8 +142,6 @@
         const hmnyResult = await hmnyCall.json();
 
         return hmnyResult.result;
-
-        //this.currentBlock = hmnyResult.result;
       },
 
 
