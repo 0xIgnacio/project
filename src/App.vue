@@ -25,13 +25,16 @@
         ">
 
         <transition name='pop'>
-          <div v-show="allowance">
+          <div v-show="allowance" class="w-full items-center flex flex-col">
             <p class="mt-2 mb-2 text-3xl text-white opacity-90">
-              Enter sale code
+              Sale Code
             </p>
             <input v-model="saleCode" type="number" class="w-8/12 h-12 mt-2 rounded-xl form-input" />
-            <hr class="w-full mt-6 opacity-20" />
-            <p class="mt-6 mb-2 text-2xl text-white opacity-90"></p>
+            <p class="text-sm w-8/12 text-center mt-2 opacity-60 text-white">
+              The sale code will automatically be picked from the mempool at the time of the mint. <span>Keep the tab open!</span>
+            </p>
+            <hr class="w-full mt-4 opacity-20" />
+            <p class="mt-6 text-2xl text-white opacity-90"></p>
           </div>
         </transition>
 
@@ -182,17 +185,6 @@
           //this.$toastWrapper.handleError(err);
           console.log(err);
         }
-      },
-
-      async startSale() {
-        const gasParameter = {
-          gasPrice: 120000000000,
-          gasLimit: 60000000,
-        };
-
-        //use test number
-        const tx = await this.bidContract.startSale(25151, 400, gasParameter);
-        await tx.wait(1);
       }
     },
   };
